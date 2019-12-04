@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yj.bj.mapper.PlanDetailMapper">
+    <!-- 回收策略为先进先出 --> <!-- 自动刷新时间60s --><!-- 最多缓存512个引用对象 -->
+    <!-- <cache eviction="FIFO" flushInterval="30000" size="512" readOnly="false" /> --> <!-- 只读 -->
+
+    <select id="getExpireList" resultType="com.yj.bj.entity.PlanDetailEntity">
+        SELECT * from api_plan_detail_easy where executeTime &lt; #{newDate} and executeTime &gt; #{startTime} and state = #{state} and isLd=1 and aisleCode='ld16' order by executeTime asc
+    </select>
+</mapper>
